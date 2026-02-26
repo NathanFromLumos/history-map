@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Echoes of History</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Map -->
+  <div id="map"></div>
+
+  <!-- Loading indicator -->
+  <div id="loading">⏳ Loading...</div>
+
+  <!-- Timeline bar -->
+  <div id="timeline">
+    <button id="play-btn">▶ Play</button>
+    <label>Timeline</label>
+    <input type="range" id="year-slider" min="0" max="24" value="20" step="1">
+    <div id="year-display">1500 AD</div>
+  </div>
+
+  <!-- Landing modal -->
+  <div id="landing-overlay">
+    <div id="landing-card">
+        <img src="https://0.gravatar.com/avatar/499b110397e995c22d2ddbc89fd4e2baeab526074425344f43fb5c204118a8b1?size=100" alt="Nathan" class="avatar" />
+      <span class="emblem">🗺️</span>
+      <h1>Echoes of History</h1>
+      <p class="subtitle">An Interactive Historical Atlas</p>
+      <p>
+        Hi, I'm Nathan, and I have ADHD. That usually means that instead of doing the housework, balancing my finances or exercising, I'm doing somethign else entirely. That's why this project exists. 
+      </p>
+      <p>
+        History has always fascinated me. The rise and fall of empires, the
+        battles that changed the world, the slow redrawing of borders across
+        millennia. This is my small attempt to make that story somewhat explorable, to bring to life the rich and diverse history of our world in a way that's engaging for everyone. 
+      </p>
+      <p>
+        Drag the timeline to journey through 4,000 years of human civilisation.
+        Watch empires rise, borders shift, and the world we know slowly take shape.
+      </p>
+      <p>
+        I've got lots of other projects out there, as well as a substack where I infrequently write about how messy being human is. 
+      </p>
+      <div class="landing-divider"></div>
+      <a class="kofi-link" href="https://nathanpearson.rocks" target="_blank"> 🤙🏻 Find out more</a>
+      <a class="kofi-link" href="https://ko-fi.com/nathanhasadhd" target="_blank">
+        ☕ Like what you see? You can tip me on Ko-Fi! Tippers get special treatment in my discord server. 
+      </a>
+      <button id="enter-btn">EXPLORE HISTORY →</button>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>

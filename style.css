@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+* { box-sizing: border-box; }
+body { margin: 0; padding: 0; font-family: 'Crimson Text', serif; }
+#map { height: 100vh; width: 100%; }
+
+/* ─── Timeline Bar ─── */
+#timeline {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(12, 10, 8, 0.92);
+  color: white;
+  padding: 14px 40px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-top: 1px solid rgba(232, 168, 56, 0.3);
+}
+
+#timeline label {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  color: rgba(255,255,255,0.7);
+}
+
+#year-slider { flex: 1; accent-color: #e8a838; cursor: pointer; }
+
+#year-display {
+  font-family: 'Cinzel', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #e8a838;
+  min-width: 120px;
+  text-align: right;
+  letter-spacing: 1px;
+}
+
+/* ─── Play Button ─── */
+#play-btn {
+  background: #e8a838;
+  border: none;
+  color: #111;
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 8px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+#play-btn:hover { background: #f0bc5e; }
+
+/* ─── Loading Indicator ─── */
+#loading {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(12, 10, 8, 0.9);
+  color: #e8a838;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  z-index: 2000;
+  display: none;
+  border: 1px solid rgba(232, 168, 56, 0.4);
+}
+
+/* ─── Landing Modal ─── */
+#landing-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 6, 4, 0.88);
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+#landing-card {
+  background: #1a1510;
+  border: 1px solid rgba(232, 168, 56, 0.4);
+  border-radius: 4px;
+  padding: 52px 56px;
+  max-width: 580px;
+  width: 90%;
+  text-align: center;
+  color: #f0e6d0;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+  position: relative;
+}
+
+#landing-card::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(232, 168, 56, 0.15);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+#landing-card .emblem {
+  font-size: 44px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+#landing-card h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #e8a838;
+  margin: 0 0 8px;
+  letter-spacing: 2px;
+}
+
+#landing-card .subtitle {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: rgba(232, 168, 56, 0.6);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+#landing-card p {
+  font-size: 17px;
+  line-height: 1.75;
+  color: rgba(240, 230, 208, 0.85);
+  margin: 0 0 20px;
+}
+
+.landing-divider {
+  width: 60px;
+  height: 1px;
+  background: rgba(232, 168, 56, 0.4);
+  margin: 24px auto;
+}
+
+#landing-card .kofi-link {
+  display: inline-block;
+  margin-bottom: 28px;
+  color: #e8a838;
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  border: 1px solid rgba(232, 168, 56, 0.4);
+  padding: 8px 20px;
+  border-radius: 20px;
+  transition: all 0.2s;
+}
+
+#landing-card .kofi-link:hover {
+  background: rgba(232, 168, 56, 0.1);
+  border-color: #e8a838;
+}
+
+#enter-btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background: #e8a838;
+  color: #111;
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#enter-btn:hover { background: #f0bc5e; }
