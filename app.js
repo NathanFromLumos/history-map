@@ -35,28 +35,41 @@ function nameToColour(name) {
 
 let currentLayer = null;
 let currentYear = null;
+let loadGeneration = 0;
 const loading = document.getElementById('loading');
+const FADE_MS = 400;
+
+function animateLayer(layer, fromFill, toFill, fromStroke, toStroke, onComplete) {
+  const start = performance.now();
+  function step(now) {
+    const t = Math.min((now - start) / FADE_MS, 1);
+    const ease = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    layer.setStyle({
+      fillOpacity: fromFill + (toFill - fromFill) * ease,
+      opacity:     fromStroke + (toStroke - fromStroke) * ease
+    });
+    if (t < 1) requestAnimationFrame(step);
+    else if (onComplete) onComplete();
+  }
+  requestAnimationFrame(step);
+}
 
 function loadBorders(year) {
   if (year === currentYear) return;
   currentYear = year;
 
-  if (currentLayer) {
-    map.removeLayer(currentLayer);
-    currentLayer = null;
-  }
+  const generation = ++loadGeneration;
+  const outgoing = currentLayer;
+  currentLayer = null;
 
   loading.style.display = 'block';
 
   fetch(getGeoJSONUrl(year))
     .then(res => res.json())
     .then(data => {
-      if (currentLayer) {
-        map.removeLayer(currentLayer);
-        currentLayer = null;
-      }
+      if (generation !== loadGeneration) return;
 
-      currentLayer = L.geoJSON(data, {
+      const newLayer = L.geoJSON(data, {
         style: function(feature) {
           const name = feature.properties.SUBJECTO || feature.properties.NAME;
           const colour = nameToColour(name);
@@ -64,7 +77,8 @@ function loadBorders(year) {
             color: '#333',
             weight: 0.8,
             fillColor: colour,
-            fillOpacity: 0.5
+            fillOpacity: 0,
+            opacity: 0
           };
         },
         onEachFeature: function (feature, layer) {
@@ -74,7 +88,14 @@ function loadBorders(year) {
         }
       }).addTo(map);
 
+      currentLayer = newLayer;
       loading.style.display = 'none';
+
+      animateLayer(newLayer, 0, 0.5, 0, 1, null);
+
+      if (outgoing) {
+        animateLayer(outgoing, 0.5, 0, 1, 0, () => map.removeLayer(outgoing));
+      }
     })
     .catch(err => {
       console.error('Failed to load borders:', err);
